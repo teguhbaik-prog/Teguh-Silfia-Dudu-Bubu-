@@ -1,0 +1,254 @@
+/* =========================================================
+   ROOT VARIABLES
+   Gunakan CSS Variable agar mudah ganti tema
+   ========================================================= */
+:root {
+  /* Day Mode Colors */
+  --bg-main: #fff7f9;
+  --bg-secondary: #fdf0f5;
+  --text-main: #3a2f35;
+  --text-soft: #6b5a62;
+  --accent: #e8a1b2;
+  --accent-soft: #f3c6d3;
+  --border-soft: #ead7dd;
+
+  /* Typography */
+  --font-main: 'Poppins', system-ui, sans-serif;
+  --font-accent: 'Playfair Display', serif;
+
+  /* Layout */
+  --radius: 14px;
+  --gap: 1rem;
+  --transition-fast: 0.25s ease;
+  --transition-slow: 0.5s ease;
+}
+
+/* =========================================================
+   NIGHT MODE (aktifkan dengan class .night di <body>)
+   ========================================================= */
+body.night {
+  --bg-main: #1b1620;
+  --bg-secondary: #241d2b;
+  --text-main: #f3e9ee;
+  --text-soft: #c7b7bf;
+  --accent: #c28bb0;
+  --accent-soft: #8f5f7e;
+  --border-soft: #3a2f3f;
+}
+
+/* =========================================================
+   RESET & BASE
+   ========================================================= */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-main);
+  background: var(--bg-main);
+  color: var(--text-main);
+  line-height: 1.6;
+  transition: background var(--transition-slow), color var(--transition-slow);
+}
+
+/* =========================================================
+   GLOBAL ELEMENT
+   ========================================================= */
+img,
+video {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--radius);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* =========================================================
+   CONTAINER
+   ========================================================= */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  padding: 1rem;
+  margin: auto;
+}
+
+/* =========================================================
+   HEADER / HERO SECTION
+   ========================================================= */
+.hero {
+  text-align: center;
+  padding: 3rem 1rem 2.5rem;
+  animation: fadeIn 1s ease forwards;
+}
+
+.hero h1 {
+  font-family: var(--font-accent);
+  font-size: clamp(2rem, 5vw, 3rem);
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+
+.hero p {
+  color: var(--text-soft);
+  max-width: 600px;
+  margin: auto;
+}
+
+/* =========================================================
+   BUTTON (misal toggle day/night)
+   ========================================================= */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.6rem 1.2rem;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--text-main);
+  border: 1px solid var(--border-soft);
+  cursor: pointer;
+  transition: transform var(--transition-fast),
+              background var(--transition-fast);
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+/* =========================================================
+   GALLERY GRID (foto & video)
+   Scalable untuk ratusan media
+   ========================================================= */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: var(--gap);
+  padding: 1rem 0 3rem;
+}
+
+.gallery-item {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius);
+  overflow: hidden;
+  animation: fadeUp 0.6s ease both;
+}
+
+.gallery-item img,
+.gallery-item video {
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  transition: transform var(--transition-fast);
+}
+
+.gallery-item:hover img,
+.gallery-item:hover video {
+  transform: scale(1.04);
+}
+
+/* =========================================================
+   CAPTION / DESKRIPSI KENANGAN
+   ========================================================= */
+.caption {
+  padding: 0.6rem 0.7rem;
+  font-size: 0.85rem;
+  color: var(--text-soft);
+  text-align: center;
+}
+
+/* =========================================================
+   SECTION (cerita, timeline, pesan cinta)
+   ========================================================= */
+.section {
+  padding: 3rem 1rem;
+}
+
+.section-title {
+  font-family: var(--font-accent);
+  font-size: 1.6rem;
+  color: var(--accent);
+  margin-bottom: 1.2rem;
+  text-align: center;
+}
+
+/* =========================================================
+   ANIMATIONS (ringan & performa aman)
+   ========================================================= */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================================================
+   SCROLL ANIMATION HELPER
+   Tambahkan class .reveal via JS saat muncul di viewport
+   ========================================================= */
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity var(--transition-slow),
+              transform var(--transition-slow);
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+footer {
+  padding: 2rem 1rem;
+  text-align: center;
+  color: var(--text-soft);
+  font-size: 0.85rem;
+  border-top: 1px solid var(--border-soft);
+}
+
+/* =========================================================
+   RESPONSIVE (Tablet & Desktop)
+   ========================================================= */
+@media (min-width: 768px) {
+  .hero {
+    padding: 4rem 1rem 3rem;
+  }
+
+  .gallery {
+    gap: 1.2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .gallery {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  }
+}
